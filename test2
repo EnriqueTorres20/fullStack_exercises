@@ -1,1 +1,42 @@
-[![](https://mermaid.ink/img/pako:eNq9VE1v2zAM_SuEz1kydDcfeln3gWJrBzhHAwMj07FaWdIkKk1Q9L-Psp1lQRsgxdDBgEHRFPn4zMfHQrmGirKI9CuRVXSlcR2wr63HwFppj5ZhFdxDpHDsFMcm-2qLivUGmQ5xkwHvLi-nOCjhx221hI7Zx3KxiJwaTXGu4rwjE7W91_NWL2iLvTeE3i8sPfy0jqm2-Q1BrzsG1-6LSMK95V1k4I6gpxhxTcA7Tw2sdoMz5RBtB5tpy2L7xNBqMs1f2PftTHCPkNOWVOKcnzvXADvwwSkpdiiQMx8u59sHnJN3j-7D-4sZYLyH1gVAkD4hZPZzEw6MU8jaWVjktmNtG3qG8WzKv3x6FeNjwZOUHHf1dfn9G1w5lXqy_D9h9qitfD4f6ceqgop3hmJH9I9QXwnz7jlKOAXzDjcIUQXt83QaegEoZKQ3J-Sw7P6Ah8ii1DgNrrbrYVCvpUA15s-qFx9KJWLV0TjJ19XtDbTB9cPpjX9jg4zCj7Nn_8fPGSoYHYfGh2mFHqURUXoWYcwyR8g5TxGYu4EXCTzmb1L8SItCY1aoRLDJqkGbA3OBJH8YQ0Yw2iqTGlk9g0t0jU0-DfsrV85PMSt6CjIcjWzdR0EDdSHhPdVFKWZDLSbDdVHbJwnFxK7aWVWUHBLNiuSFtv2SLsoWTaSn3z2hH1w?type=png)](https://mermaid.live/edit#pako:eNq9VE1v2zAM_SuEz1kydDcfeln3gWJrBzhHAwMj07FaWdIkKk1Q9L-Psp1lQRsgxdDBgEHRFPn4zMfHQrmGirKI9CuRVXSlcR2wr63HwFppj5ZhFdxDpHDsFMcm-2qLivUGmQ5xkwHvLi-nOCjhx221hI7Zx3KxiJwaTXGu4rwjE7W91_NWL2iLvTeE3i8sPfy0jqm2-Q1BrzsG1-6LSMK95V1k4I6gpxhxTcA7Tw2sdoMz5RBtB5tpy2L7xNBqMs1f2PftTHCPkNOWVOKcnzvXADvwwSkpdiiQMx8u59sHnJN3j-7D-4sZYLyH1gVAkD4hZPZzEw6MU8jaWVjktmNtG3qG8WzKv3x6FeNjwZOUHHf1dfn9G1w5lXqy_D9h9qitfD4f6ceqgop3hmJH9I9QXwnz7jlKOAXzDjcIUQXt83QaegEoZKQ3J-Sw7P6Ah8ii1DgNrrbrYVCvpUA15s-qFx9KJWLV0TjJ19XtDbTB9cPpjX9jg4zCj7Nn_8fPGSoYHYfGh2mFHqURUXoWYcwyR8g5TxGYu4EXCTzmb1L8SItCY1aoRLDJqkGbA3OBJH8YQ0Yw2iqTGlk9g0t0jU0-DfsrV85PMSt6CjIcjWzdR0EDdSHhPdVFKWZDLSbDdVHbJwnFxK7aWVWUHBLNiuSFtv2SLsoWTaSn3z2hH1w)
+sequenceDiagram
+participant browser
+participant server
+
+activate browser
+browser ->> server : POST https://studies.cs.helsinki.fi/exampleapp/new_note
+note right of browser : browser post the message typed by the user in the text input field
+activate server
+server ->> server : execute method to process the user text
+server -->> browser : server message 302, ask for a new request to location /notes
+deactivate server
+
+activate browser
+browser ->> server : GET https://studies.cs.helsinki.fi/exampleapp/notes
+activate server
+server -->> browser : HTML Document
+deactivate server
+
+activate browser
+browser ->> server : GET https://studies.cs.helsinki.fi/exampleapp/main.css
+activate server
+server -->> browser : CSS Stylesheet
+deactivate server
+
+activate browser
+browser ->> server : https://studies.cs.helsinki.fi/exampleapp/main.js
+activate server 
+server -->> browser : java script file
+deactivate server 
+
+Note right of browser : The browser starts executing the JavaScript code that fetches the JSON from the server
+
+activate browser
+browser ->> server : GET https://studies.cs.helsinki.fi/exampleapp/data.json
+activate server
+server -->> browser : Fetch list of notes made by users in a json file
+deactivate server
+
+ Note right of browser: The browser executes the callback function that renders the notes included the new added note 
+
+
+
