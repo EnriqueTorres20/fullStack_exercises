@@ -1,0 +1,39 @@
+sequenceDiagram
+participant browser
+participant server
+
+activate browser
+browser ->> server : POST https://studies.cs.helsinki.fi/exampleapp/new_note
+note right of browser : browser post the message typed by the user in the text input field
+activate server
+server ->> server : execute method to process the user text
+server -->> browser : server message 302, ask for a new request to location /notes
+deactivate server
+
+activate browser
+browser ->> server : GET https://studies.cs.helsinki.fi/exampleapp/notes
+activate server
+server -->> browser : HTML Document
+deactivate server
+
+activate browser
+browser ->> server : GET https://studies.cs.helsinki.fi/exampleapp/main.css
+activate server
+server -->> browser : CSS Stylesheet
+deactivate server
+
+activate browser
+browser ->> server : https://studies.cs.helsinki.fi/exampleapp/main.js
+activate server 
+server -->> browser : java script file
+deactivate server 
+
+Note right of browser : The browser starts executing the JavaScript code that fetches the JSON from the server
+
+activate browser
+browser ->> server : GET https://studies.cs.helsinki.fi/exampleapp/data.json
+activate server
+server -->> browser : Fetch list of notes made by users in a json file
+deactivate server
+
+ Note right of browser: The browser executes the callback function that renders the notes included the new added note 
