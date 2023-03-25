@@ -1,0 +1,37 @@
+
+sequenceDiagram
+
+participant browser
+participant server
+activate browser
+browser ->> server: GET https://studies.cs.helsinki.fi/exampleapp/spa
+activate server
+server -->> browser: Answer with the html document spa
+deactivate server
+
+activate browser 
+browser ->> server : GET https://studies.cs.helsinki.fi/exampleapp/main.css
+activate server
+server -->> browser : Answer with the css document main.css
+deactivate server
+
+activate browser
+browser ->> server : GET https://studies.cs.helsinki.fi/exampleapp/spa.js
+activate server
+server -->> browser : Browser loads the javascript file spa.js
+deactivate server
+Note right of browser: The browser starts executing the JavaScript code that fetches the JSON from the server
+
+activate browser
+browser ->> server : GET https://studies.cs.helsinki.fi/exampleapp/data.json
+activate server 
+server -->> browser : Browser download the json file which is processed by spa.js 
+deactivate server
+Note right of browser : The browser executes the function that renders the notes 
+activate browser
+browser ->>server : POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+activate server
+server -->> browser : exectute spa.js add note but not reload the page
+deactivate server 
+Note right of server : The function inside spa.js prevent the default state to avoid the reload of the page
+Note right of server : server answer with 201 state 
